@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace Ex03.GarageLogic.Enums
 {
-    class Program
+    enum eColor
     {
-        static void Main(string[] args)
-        {
-           
-        }
+        Green,
+        Silver,
+        White,
+        Black
     }
 }

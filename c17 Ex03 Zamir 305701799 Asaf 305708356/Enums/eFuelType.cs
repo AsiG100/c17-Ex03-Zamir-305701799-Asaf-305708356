@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace Ex03.GarageLogic.Enums
 {
-    class Program
+    enum eFuelType
     {
-        static void Main(string[] args)
-        {
-           
-        }
+        Soler,
+        Octan95,
+        Octan96,
+        Octan98
     }
 }

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace Ex03.GarageLogic
 {
-    class Program
+    class Garage
     {
-        static void Main(string[] args)
-        {
-           
-        }
+        private TreatedCar[] m_TreatedCars;
     }
 }
