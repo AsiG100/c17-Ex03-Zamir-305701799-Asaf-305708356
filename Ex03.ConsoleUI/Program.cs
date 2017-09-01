@@ -11,6 +11,8 @@ namespace Ex03.ConsoleUI
         static void Main(string[] args)
         {
             Console.WriteLine("good afternoon asaf");
+            Console.WriteLine("good afternoon zamir");
+
         }
     }
 }
