@@ -1,0 +1,9 @@
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe.config
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.pdb
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe.CodeAnalysisLog.xml
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe.lastcodeanalysissucceeded
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csprojResolveAssemblyReference.cache
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.exe
+C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.pdb
