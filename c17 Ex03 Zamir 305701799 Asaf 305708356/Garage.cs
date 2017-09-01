@@ -21,13 +21,13 @@ namespace Ex03.GarageLogic
 
             foreach (TreatedCar car in m_TreatedCars)
             {
-                if (car.m_Vehicle.m_LicenceNumber == i_Vehicle.m_LicenceNumber)
+                if (car.Vehicle.LicenceNumber == i_Vehicle.LicenceNumber)
                 {
                     messege = string.Format("The vehicle withe the licence number " +
                                                    "of {0} is already in the garage.\n" +
                                                    "the condition has modified to {1}",
-                                        i_Vehicle.m_LicenceNumber, eCondition.InTreatment);
-                    car.m_TreatmentCondition = eCondition.InTreatment;
+                                        i_Vehicle.LicenceNumber, eCondition.InTreatment);
+                    car.TreatmentCondition = eCondition.InTreatment;
                 }
             }
 

@@ -9,10 +9,10 @@ namespace Ex03.GarageLogic
 {
     class TreatedCar
     {
-        public string m_OwnerName { get; set; }
-        public string m_OwnerPhone { get; set; }
-        public eCondition m_TreatmentCondition { get; set; }
-        public Vehicle m_Vehicle { get; set; }
+        private string m_OwnerName;
+        private string m_OwnerPhone;
+        private eCondition m_TreatmentCondition;
+        private Vehicle m_Vehicle;
 
         public TreatedCar(string i_Owner, string i_Phone, eCondition i_Condition, 
                                                                 Vehicle i_Vehicle)
@@ -23,6 +23,21 @@ namespace Ex03.GarageLogic
             this.m_Vehicle = i_Vehicle;
         }
 
+        public Vehicle Vehicle
+        {
+            get
+            {
+                return m_Vehicle;
+            }
+        }
+
+        public eCondition TreatmentCondition
+        {
+            set
+            {
+                m_TreatmentCondition = value;
+            }
+        }
 
     }
 }
