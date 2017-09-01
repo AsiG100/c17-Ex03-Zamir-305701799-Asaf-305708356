@@ -21,5 +21,13 @@ namespace Ex03.GarageLogic
                 return m_LicenceNumber;
             }
         }
+
+        public List<Wheel> Wheels
+        {
+            get
+            {
+                return m_Wheels;
+            }
+        }
     }
 }

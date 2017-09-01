@@ -33,6 +33,10 @@ namespace Ex03.GarageLogic
 
         public eCondition TreatmentCondition
         {
+            get
+            {
+                return m_TreatmentCondition;
+            }
             set
             {
                 m_TreatmentCondition = value;
