@@ -37,5 +37,31 @@ namespace Ex03.GarageLogic
             return messege;
 
         }
+
+        public List<string> FindLicenceNumbers(eCondition i_condition)
+        {
+            List<string> licenceNumbers = new List<string>();
+            foreach(TreatedCar car in m_TreatedCars)
+            {
+                if(car.TreatmentCondition==i_condition)
+                {
+                    licenceNumbers.Add(car.Vehicle.LicenceNumber);
+                }
+            }
+
+            return licenceNumbers;
+        }
+
+        public List<string> FindLicenceNumbers()
+        {
+            List<string> licenceNumbers = new List<string>();
+            foreach (TreatedCar car in m_TreatedCars)
+            {
+                licenceNumbers.Add(car.Vehicle.LicenceNumber);
+            }
+
+            return licenceNumbers;
+        }
     }
+
 }
