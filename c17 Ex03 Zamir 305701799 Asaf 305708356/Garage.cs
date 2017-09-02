@@ -21,15 +21,15 @@ namespace Ex03.GarageLogic
          */
         public string AddVehicle(string i_owner, string i_Phone, Vehicle i_Vehicle)
         {
-            string messege = "The vehicle has added";
+            string messege = "The vehicle was added to garage cars list";
 
             foreach (TreatedCar car in m_TreatedCars)
             {
                 if (car.Vehicle.LicenceNumber == i_Vehicle.LicenceNumber)
                 {
-                    messege = string.Format("The vehicle withe the licence number " +
-                                                   "of {0} is already in the garage.\n" +
-                                                   "the condition has modified to {1}",
+                    messege = string.Format("The vehicle with the following licence number -" +
+                                                   "{0}, is already in the garage.\n" +
+                                                   "It's condition was modified to {1}",
                                         i_Vehicle.LicenceNumber, eCondition.InTreatment);
                     car.TreatmentCondition = eCondition.InTreatment;
                     break;
@@ -40,7 +40,6 @@ namespace Ex03.GarageLogic
             m_TreatedCars.Add(newCar);
 
             return messege;
-
         }
 
         /*  Method gets enum with some condition.
