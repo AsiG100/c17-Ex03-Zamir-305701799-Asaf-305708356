@@ -4,7 +4,7 @@
     {
         protected static void Check()
         {
-            string name = moshe;
+            
         }
     }
 }
