@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ex03.GarageLogic.Enums;
+﻿using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
@@ -41,6 +36,15 @@ namespace Ex03.GarageLogic
             {
                 m_TreatmentCondition = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string str = string.Format("Owner name: {0} , Treatment condition: {1}",
+                                        m_OwnerName, m_TreatmentCondition);
+            str += Vehicle.ToString();
+
+            return str;
         }
 
     }

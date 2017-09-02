@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     class Wheel
     {
@@ -36,6 +30,13 @@ namespace Ex03.GarageLogic
             {
                 m_CurrentAirPressure = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string str = string.Format("Manufacturer: {0}, Current air pressure: {1}"
+                                        , m_Manufacturer, m_CurrentAirPressure);
+            return str;
         }
 
     }
