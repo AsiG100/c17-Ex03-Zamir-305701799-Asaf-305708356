@@ -12,7 +12,13 @@ namespace Ex03.GarageLogic
             this.m_TreatedCars = new List<TreatedCar>();
         }
 
-        //add a new vehicle to the list or edit its condition if it exists
+        /*  Method gets 2 strings and a vehicle object representing owner name, 
+         *  his phone and car details.
+         *  it checks if the car in the garage
+         *      if yes, it changes it's condition to 'In treatment'
+         *      if no, it adds it to garage's car list.
+         *  The method returns string with confirmation messege
+         */
         public string AddVehicle(string i_owner, string i_Phone, Vehicle i_Vehicle)
         {
             string messege = "The vehicle has added";
@@ -37,7 +43,11 @@ namespace Ex03.GarageLogic
 
         }
 
-        //find all lincence numbers with the condition sent 
+        /*  Method gets enum with some condition.
+         *  It checks in treated cars list for all cars with this condition
+         *  and adds their licnce number to a new list.
+         *  The method returns the new filtered list.
+         */
         public List<string> FindLicenceNumbers(eCondition i_condition)
         {
             List<string> licenceNumbers = new List<string>();
@@ -52,7 +62,9 @@ namespace Ex03.GarageLogic
             return licenceNumbers;
         }
 
-        //find all licence numbers
+        /*  Method creats a list of car's licence numbers.
+         *  It adds all licence numbers of cars in the garage to this list and returns it.
+         */
         public List<string> FindLicenceNumbers()
         {
             List<string> licenceNumbers = new List<string>();
@@ -64,7 +76,10 @@ namespace Ex03.GarageLogic
             return licenceNumbers;
         }
 
-        //change the condition of the treatment
+        /*  Methos gets a string and and enum representing licence of specific car and a condition.
+         *  If this licence number appears in the list of cars in the garage
+         *      it changes the condition of this car to the given one.
+         */
         public void ChangeCondition(string i_LicenceNumber, eCondition i_Condition)
         {
             foreach(TreatedCar car in m_TreatedCars)
@@ -77,7 +92,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //inflate the air in the wheels of the vehicle to the max
+        /*  Methos gets a string  representing licence of specific car.
+         *  If this licence number appears in the list of cars in the garage
+         *      it loops through all wheel objects of cars and
+         *      changes their current air pressure to maximum.
+         */
         public void InflateWheelsToMax( string i_LicenceNumber)
         {
             foreach(TreatedCar car in m_TreatedCars)
