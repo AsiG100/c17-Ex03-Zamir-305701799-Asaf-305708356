@@ -75,39 +75,129 @@ namespace Ex03.GarageLogic
             return licenceNumbers;
         }
 
-        /*  Methos gets a string and and enum representing licence of specific car and a condition.
+        /*  Method gets a string and an enum representing licence of specific car and a condition.
          *  If this licence number appears in the list of cars in the garage
-         *      it changes the condition of this car to the given one.
+         *  it changes the condition of this car to the given one and returns true.
+         *  Else it returns false
          */
-        public void ChangeCondition(string i_LicenceNumber, eCondition i_Condition)
+        public bool ChangeCondition(string i_LicenceNumber, eCondition i_Condition)
         {
+            bool isFound = false;
+
             foreach(TreatedCar car in m_TreatedCars)
             {
                 if(car.Vehicle.LicenceNumber==i_LicenceNumber)
                 {
                     car.TreatmentCondition = i_Condition;
+                    isFound = true;
                     break;
                 }
             }
+
+            return isFound;
         }
 
-        /*  Methos gets a string  representing licence of specific car.
+        /*  Method gets a string  representing licence of specific car.
          *  If this licence number appears in the list of cars in the garage
          *      it loops through all wheel objects of cars and
-         *      changes their current air pressure to maximum.
+         *      changes their current air pressure to maximum and returns true.
+         *  Else it returns false.
          */
-        public void InflateWheelsToMax( string i_LicenceNumber)
+        public bool InflateWheelsToMax( string i_LicenceNumber)
         {
-            foreach(TreatedCar car in m_TreatedCars)
+            bool isFound = false;
+
+            foreach (TreatedCar car in m_TreatedCars)
             {
                 if(car.Vehicle.LicenceNumber==i_LicenceNumber)
                 {
                     foreach(Wheel wheel in car.Vehicle.Wheels)
                     {
                         wheel.CurrentAirPressure = wheel.MaxAirPressure;
+                        isFound = true;
                     }
                 }
             }
+
+            return isFound;
+        }
+
+        /*  Method gets a string  representing licence of specific car.
+         *  If this licence number appears in the list of cars in the garage
+         *  it verifies that the fuel type is similar to the one sent as 
+         *  a parameter and fill up the amount that was requested and returns true.
+         *  Else it returns false.
+         */
+        public bool FuelVehicle(string i_LicenceNumber, eFuelType i_FuelType
+                                , float i_Amount)
+        {
+            bool isFound = false;
+
+            foreach (TreatedCar car in m_TreatedCars)
+            {
+                if(car.Vehicle.LicenceNumber==i_LicenceNumber)
+                {
+                    if(car.Vehicle.EnergyType is Fuel)
+                    {
+                        Fuel fuel = (Fuel)car.Vehicle.EnergyType;
+                        if(fuel.FuelType==i_FuelType)
+                        {
+                            fuel.StreamFuel(i_FuelType, i_Amount);
+                            isFound = true;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            return isFound;
+        }
+
+        /*  Method gets a string  representing licence of specific car.
+         *  If this licence number appears in the list of cars in the garage
+         *  it verifies that the fuel type is similar to the one sent as 
+         *  a parameter and fill up the amount that was requested and returns true.
+         *  Else it returns false.
+         */
+        public bool ChargeVehicle(string i_LicenceNumber, float i_Amount)
+        {
+            bool isFound = false;
+
+            foreach (TreatedCar car in m_TreatedCars)
+            {
+                if (car.Vehicle.LicenceNumber == i_LicenceNumber)
+                {
+                    if (car.Vehicle.EnergyType is Electricity)
+                    {
+                        Electricity electricity = (Electricity)car.Vehicle.EnergyType;
+                        electricity.ChargeBattery(i_Amount);
+                        isFound = true;
+                    }
+                    break;
+                }
+            }
+
+            return isFound;
+        }
+
+        /*  Method gets a string  representing licence of specific car.
+         *  If this licence number appears in the list of cars in the garage
+         *  it displays it's full details.
+         *  Else it returns 'The vehicle wasn't found'.
+         */
+        public string DisplayVehicleDetails(string i_LicenceNumber)
+        {
+            string str = "The vehicle wasn't found";
+
+            foreach(TreatedCar car in m_TreatedCars)
+            {
+                if(car.Vehicle.LicenceNumber == i_LicenceNumber)
+                {
+                    str = car.ToString();
+                }
+            }
+
+            return str;
         }
 
     }

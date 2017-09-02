@@ -38,5 +38,14 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override string ToString()
+        {
+            string str = string.Format("Owner name: {0} , Treatment condition: {1}",
+                                        m_OwnerName, m_TreatmentCondition);
+            str += Vehicle.ToString();
+
+            return str;
+        }
+
     }
 }

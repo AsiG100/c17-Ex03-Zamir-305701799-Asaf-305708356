@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic
 {
-    class Electricity
+    class Electricity : Energy
     {
         private float m_TimeLeft;
         private float m_AcummulatedMaxTime;
@@ -9,6 +9,12 @@
         {
             //TODO
             return 0f;
+        }
+
+        public override string ToString()
+        {
+            string str = string.Format("Time left for the battery: {0}", m_TimeLeft);
+            return str;
         }
     }
 }

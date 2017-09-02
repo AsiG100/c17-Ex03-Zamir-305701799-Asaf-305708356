@@ -32,5 +32,12 @@
             }
         }
 
+        public override string ToString()
+        {
+            string str = string.Format("Manufacturer: {0}, Current air pressure: {1}"
+                                        , m_Manufacturer, m_CurrentAirPressure);
+            return str;
+        }
+
     }
 }
