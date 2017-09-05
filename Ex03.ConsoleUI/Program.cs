@@ -4,11 +4,13 @@ namespace Ex03.ConsoleUI
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("good afternoon asaf");
-            Console.WriteLine("good afternoon zamir");
+            GarageUI garage = new GarageUI();
 
+            garage.RunGarage();
+            Console.WriteLine("Press 'enter' to exit");
+            Console.ReadLine();
         }
     }
 }

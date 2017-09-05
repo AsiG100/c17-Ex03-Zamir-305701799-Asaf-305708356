@@ -1,20 +1,15 @@
-﻿namespace Ex03.GarageLogic
+﻿using Ex03.GarageLogic.Enums;
+
+namespace Ex03.GarageLogic
 {
-    class Electricity : Energy
+    public class Electricity : Energy
     {
-        private float m_TimeLeft;
-        private float m_AcummulatedMaxTime;
+        private eFuelType m_FuelType;
 
-        public float ChargeBattery(float i_amount)
+        public eFuelType FuelType
         {
-            //TODO
-            return 0f;
-        }
-
-        public override string ToString()
-        {
-            string str = string.Format("Time left for the battery: {0}", m_TimeLeft);
-            return str;
+            get { return m_FuelType; }
+            set { m_FuelType = value; }
         }
     }
 }

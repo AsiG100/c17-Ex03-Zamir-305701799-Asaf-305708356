@@ -1,8 +1,8 @@
 ﻿namespace Ex03.GarageLogic.Enums
 {
-    enum eVehicleType
+    public enum eVehicleType
     {
-        RegularMotorCycle,
+        RegularMotorCycle = 1,
         ElectricMotorCycle,
         RegularCar,
         ElectricCar,

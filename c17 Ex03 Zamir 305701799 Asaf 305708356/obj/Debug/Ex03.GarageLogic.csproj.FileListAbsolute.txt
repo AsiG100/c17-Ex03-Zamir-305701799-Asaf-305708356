@@ -6,3 +6,8 @@ C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 
 C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\obj\Debug\Ex03.GarageLogic.pdb
 C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\bin\Debug\Ex03.GarageLogic.dll.CodeAnalysisLog.xml
 C:\Users\USER\Documents\GitHub\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\bin\Debug\Ex03.GarageLogic.dll.lastcodeanalysissucceeded
+C:\Users\16zam\Documents\GitHub\my fork projects\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\bin\Debug\Ex03.GarageLogic.dll
+C:\Users\16zam\Documents\GitHub\my fork projects\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\bin\Debug\Ex03.GarageLogic.pdb
+C:\Users\16zam\Documents\GitHub\my fork projects\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\obj\Debug\Ex03.GarageLogic.csprojResolveAssemblyReference.cache
+C:\Users\16zam\Documents\GitHub\my fork projects\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\obj\Debug\Ex03.GarageLogic.dll
+C:\Users\16zam\Documents\GitHub\my fork projects\c17-Ex03-Zamir-305701799-Asaf-305708356\c17 Ex03 Zamir 305701799 Asaf 305708356\obj\Debug\Ex03.GarageLogic.pdb

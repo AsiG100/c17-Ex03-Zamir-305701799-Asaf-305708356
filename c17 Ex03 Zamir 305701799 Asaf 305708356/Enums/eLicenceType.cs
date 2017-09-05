@@ -1,8 +1,8 @@
 ﻿namespace Ex03.GarageLogic.Enums
 {
-    enum eLicenceType
+    public enum eLicenceType
     {
-        A1,
+        A1 = 1,
         B1,
         AA,
         BB
