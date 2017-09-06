@@ -46,7 +46,6 @@ namespace Ex03.ConsoleUI
         public static void MenuForUser<T>(T[] i_menuToDisplay)
         {
             int optionNumber = 1;
-            Console.Clear();
 
             foreach (T option in i_menuToDisplay)
             {

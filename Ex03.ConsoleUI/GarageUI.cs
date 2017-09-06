@@ -55,6 +55,7 @@ namespace Ex03.ConsoleUI
 
             do
             {
+                Console.Clear();
                 string[] mainMenu = ConsoleUI.MainMenu();
                 ConsoleUI.MenuForUser(mainMenu);
                 Console.Write("\nChoose an option: ");
@@ -349,6 +350,7 @@ namespace Ex03.ConsoleUI
 
             foreach (Questioning currentQuestioning in i_questioningToFill)
             {
+                Console.Clear();
                 ConsoleUI.MessegeForUser(currentQuestioning.Question);
 
                 if (currentQuestioning.AnswerType.IsEnum)
