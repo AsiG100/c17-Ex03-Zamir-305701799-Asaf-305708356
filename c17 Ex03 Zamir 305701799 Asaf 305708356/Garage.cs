@@ -1,205 +1,179 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
-        private List<TreatedCar> m_TreatedCars;
+        private Dictionary<string, Vehicle> m_TreatedVehicles = new Dictionary<string, Vehicle>();
 
-        public Garage()
+        public void InitializeNewVehicle(string i_licence)
         {
-            this.m_TreatedCars = new List<TreatedCar>();
+            m_TreatedVehicles[i_licence].InitializeArguments();
         }
 
-        /*  Method gets 2 strings and a vehicle object representing owner name, 
-         *  his phone and car details.
-         *  it checks if the car in the garage
-         *      if yes, it changes it's condition to 'In treatment'
-         *      if no, it adds it to garage's car list.
-         *  The method returns string with confirmation messege
-         */
-        public string AddVehicle(string i_owner, string i_Phone, Vehicle i_Vehicle)
+        public List<Questioning> GetInfoToFill(eVehicleType i_VehicleType, string i_licence)
         {
-            string messege = "The vehicle was added to garage cars list";
+            List<Questioning> questionings = new List<Questioning>();
 
-            foreach (TreatedCar car in m_TreatedCars)
+            if (!m_TreatedVehicles.ContainsKey(i_licence))
             {
-                if (car.Vehicle.LicenceNumber == i_Vehicle.LicenceNumber)
+                Vehicle newVehicle = VehicleFactory.CreateVehicle(i_VehicleType, i_licence);
+                m_TreatedVehicles.Add(i_licence, newVehicle);
+                questionings = newVehicle.Questionings;
+            }
+            else
+            {
+                throw new Exception("Vehicle with licence plate " + i_licence +
+                                    " already exists.\n" +
+                                    "Vehicle status will change to 'in treatment'.");
+            }
+
+            return questionings;
+        }
+
+        public void InitialNewVehicleInfo(string i_licence)
+        {
+            if (m_TreatedVehicles.ContainsKey(i_licence))
+            {
+                m_TreatedVehicles[i_licence].InitializeArguments();
+            }
+            else
+            {
+                throw new Exception("Vehicle doesn't exists!");
+            }
+        }
+
+        public void ChangeVehicleCondition(string i_licence, eCondition i_newCondition)
+        {
+            if (m_TreatedVehicles.ContainsKey(i_licence))
+            {
+                m_TreatedVehicles[i_licence].TreatmentCondition = i_newCondition;
+            }
+            else
+            {
+                throw new Exception("Vehicle doesn't exists!");
+            }
+        }
+
+        public string VehicleInformation(string i_licence)
+        {
+            StringBuilder vehicleInformation = new StringBuilder();
+
+            if (m_TreatedVehicles.ContainsKey(i_licence))
+            {
+                vehicleInformation.Append("Licence plate: ");
+                vehicleInformation.Append(i_licence);
+                vehicleInformation.Append("\n");
+                vehicleInformation.Append("All information: ");
+                vehicleInformation.Append("\n");
+                vehicleInformation.Append(m_TreatedVehicles[i_licence].GetInfo());
+            }
+            else
+            {
+                throw new Exception("Vehicle doesn't exists!");
+            }
+
+            return vehicleInformation.ToString();
+        }
+
+        public List<string> GetVehiclesList()
+        {
+            List<string> vehicleList = new List<string>();
+
+            foreach (KeyValuePair<string, Vehicle> currentVehicle in m_TreatedVehicles)
+            {
+                vehicleList.Add(currentVehicle.Value.ToString());
+            }
+
+            return vehicleList;
+        }
+
+        public List<string> GetVehicleList(eCondition i_condition)
+        {
+            List<string> vehicleList = new List<string>();
+
+            foreach (KeyValuePair<string, Vehicle> currentVehicle in m_TreatedVehicles)
+            {
+                if (currentVehicle.Value.TreatmentCondition == i_condition)
                 {
-                    messege = string.Format("The vehicle with the following licence number -" +
-                                                   "{0}, is already in the garage.\n" +
-                                                   "It's condition was modified to {1}",
-                                        i_Vehicle.LicenceNumber, eCondition.InTreatment);
-                    car.TreatmentCondition = eCondition.InTreatment;
-                    break;
+                    vehicleList.Add(currentVehicle.Value.ToString());
                 }
             }
 
-            TreatedCar newCar = new TreatedCar(i_owner, i_Phone, eCondition.InTreatment, i_Vehicle);
-            m_TreatedCars.Add(newCar);
-
-            return messege;
+            return vehicleList;
         }
 
-        /*  Method gets enum with some condition.
-         *  It checks in treated cars list for all cars with this condition
-         *  and adds their licnce number to a new list.
-         *  The method returns the new filtered list.
-         */
-        public List<string> FindLicenceNumbers(eCondition i_condition)
+        public void FuelVehicle(string i_licence, eFuelType i_fuelType, float i_quantityToAdd)
         {
-            List<string> licenceNumbers = new List<string>();
-            foreach(TreatedCar car in m_TreatedCars)
+            if (m_TreatedVehicles != null && !m_TreatedVehicles.ContainsKey(i_licence))
             {
-                if(car.TreatmentCondition==i_condition)
+                throw new Exception("Vehicle doesn't exists!");
+            }
+            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Electricity)
+            {
+                throw new ArgumentException("Vehicle works on electricity and not on fuel!");
+            }
+            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Fuel)
+            {
+                throw new ArgumentException("Fuel type doesn't matchQ");
+            }
+
+            try
+            {
+                if (m_TreatedVehicles != null)
                 {
-                    licenceNumbers.Add(car.Vehicle.LicenceNumber);
+                    m_TreatedVehicles[i_licence].FillWithEnergy(i_quantityToAdd);
                 }
             }
-
-            return licenceNumbers;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        /*  Method creats a list of car's licence numbers.
-         *  It adds all licence numbers of cars in the garage to this list and returns it.
-         */
-        public List<string> FindLicenceNumbers()
+        public void ChargeVehicle(string i_licence, float i_quantityToAdd)
         {
-            List<string> licenceNumbers = new List<string>();
-            foreach (TreatedCar car in m_TreatedCars)
+            if (m_TreatedVehicles != null && !m_TreatedVehicles.ContainsKey(i_licence))
             {
-                licenceNumbers.Add(car.Vehicle.LicenceNumber);
+                throw new Exception("Vehicle doesn't exists!");
+            }
+            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Fuel)
+            {
+                throw new ArgumentException("Vehicle works on fuel and not on electricity!");
             }
 
-            return licenceNumbers;
-        }
-
-        /*  Method gets a string and an enum representing licence of specific car and a condition.
-         *  If this licence number appears in the list of cars in the garage
-         *  it changes the condition of this car to the given one and returns true.
-         *  Else it returns false
-         */
-        public bool ChangeCondition(string i_LicenceNumber, eCondition i_Condition)
-        {
-            bool isFound = false;
-
-            foreach(TreatedCar car in m_TreatedCars)
+            try
             {
-                if(car.Vehicle.LicenceNumber==i_LicenceNumber)
+                if (m_TreatedVehicles != null)
                 {
-                    car.TreatmentCondition = i_Condition;
-                    isFound = true;
-                    break;
+                    m_TreatedVehicles[i_licence].FillWithEnergy(i_quantityToAdd);
                 }
             }
-
-            return isFound;
-        }
-
-        /*  Method gets a string  representing licence of specific car.
-         *  If this licence number appears in the list of cars in the garage
-         *      it loops through all wheel objects of cars and
-         *      changes their current air pressure to maximum and returns true.
-         *  Else it returns false.
-         */
-        public bool InflateWheelsToMax( string i_LicenceNumber)
-        {
-            bool isFound = false;
-
-            foreach (TreatedCar car in m_TreatedCars)
+            catch (Exception ex)
             {
-                if(car.Vehicle.LicenceNumber==i_LicenceNumber)
-                {
-                    foreach(Wheel wheel in car.Vehicle.Wheels)
-                    {
-                        wheel.CurrentAirPressure = wheel.MaxAirPressure;
-                        isFound = true;
-                    }
-                }
+                throw ex;
             }
-
-            return isFound;
         }
 
-        /*  Method gets a string  representing licence of specific car.
-         *  If this licence number appears in the list of cars in the garage
-         *  it verifies that the fuel type is similar to the one sent as 
-         *  a parameter and fill up the amount that was requested and returns true.
-         *  Else it returns false.
-         */
-        public bool FuelVehicle(string i_LicenceNumber, eFuelType i_FuelType
-                                , float i_Amount)
+        public void InflateWheelsToMax(string i_licence)
         {
-            bool isFound = false;
-
-            foreach (TreatedCar car in m_TreatedCars)
+            if (m_TreatedVehicles.ContainsKey(i_licence))
             {
-                if(car.Vehicle.LicenceNumber==i_LicenceNumber)
-                {
-                    if(car.Vehicle.EnergyType is Fuel)
-                    {
-                        Fuel fuel = (Fuel)car.Vehicle.EnergyType;
-                        if(fuel.FuelType==i_FuelType)
-                        {
-                            fuel.StreamFuel(i_FuelType, i_Amount);
-                            isFound = true;
-                        }
-                    }
-                    break;
-                }
+                m_TreatedVehicles[i_licence].InflateWheels(m_TreatedVehicles[i_licence].Wheels[0].MaxAirPressure -
+                                                           m_TreatedVehicles[i_licence].Wheels[0].CurrentAirPressure);
             }
-
-            return isFound;
+            else
+            {
+                throw new Exception("Vehicle doesn't exists!");
+            }
         }
 
-        /*  Method gets a string  representing licence of specific car.
-         *  If this licence number appears in the list of cars in the garage
-         *  it verifies that the fuel type is similar to the one sent as 
-         *  a parameter and fill up the amount that was requested and returns true.
-         *  Else it returns false.
-         */
-        public bool ChargeVehicle(string i_LicenceNumber, float i_Amount)
+        public void RemoveVehicle(string i_licence)
         {
-            bool isFound = false;
-
-            foreach (TreatedCar car in m_TreatedCars)
-            {
-                if (car.Vehicle.LicenceNumber == i_LicenceNumber)
-                {
-                    if (car.Vehicle.EnergyType is Electricity)
-                    {
-                        Electricity electricity = (Electricity)car.Vehicle.EnergyType;
-                        electricity.ChargeBattery(i_Amount);
-                        isFound = true;
-                    }
-                    break;
-                }
-            }
-
-            return isFound;
+            m_TreatedVehicles.Remove(i_licence);
         }
-
-        /*  Method gets a string  representing licence of specific car.
-         *  If this licence number appears in the list of cars in the garage
-         *  it displays it's full details.
-         *  Else it returns 'The vehicle wasn't found'.
-         */
-        public string DisplayVehicleDetails(string i_LicenceNumber)
-        {
-            string str = "The vehicle wasn't found";
-
-            foreach(TreatedCar car in m_TreatedCars)
-            {
-                if(car.Vehicle.LicenceNumber == i_LicenceNumber)
-                {
-                    str = car.ToString();
-                }
-            }
-
-            return str;
-        }
-
     }
-
 }

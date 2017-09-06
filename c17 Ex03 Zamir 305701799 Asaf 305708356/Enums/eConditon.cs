@@ -1,8 +1,8 @@
 ﻿namespace Ex03.GarageLogic.Enums
 {
-    enum eCondition
+    public enum eCondition
     {
-        InTreatment,
+        InTreatment = 1,
         Fixed,
         Paid
     }
