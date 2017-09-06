@@ -11,5 +11,8 @@ namespace Ex03.GarageLogic
             get { return m_FuelType; }
             set { m_FuelType = value; }
         }
+
+      
     }
+
 }

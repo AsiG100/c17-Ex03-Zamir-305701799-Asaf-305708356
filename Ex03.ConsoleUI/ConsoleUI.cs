@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -45,15 +46,16 @@ namespace Ex03.ConsoleUI
         public static void MenuForUser<T>(T[] i_menuToDisplay)
         {
             int optionNumber = 1;
-
             Console.Clear();
-            Console.WriteLine("Choose an option: \n");
 
             foreach (T option in i_menuToDisplay)
             {
                 Console.WriteLine("{0}. {1}", optionNumber, option.ToString());
                 optionNumber++;
             }
+
+            
+
         }
 
         public static void MessegeForUser(string i_messege)

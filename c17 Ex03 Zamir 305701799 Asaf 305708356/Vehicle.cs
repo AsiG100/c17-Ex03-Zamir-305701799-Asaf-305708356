@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     {
         protected string m_ModelName;
         protected string m_LicenceNumber;
-        protected List<Questioning> m_Questioning = new List<Questioning>();
+        protected List<Questioning> m_Questioning;
         protected List<Wheel> m_Wheels;
         protected Energy m_Energy;
         protected string m_OwnerName;
@@ -16,18 +16,19 @@ namespace Ex03.GarageLogic
 
         public virtual void CreateQuestionings()
         {
-            m_Questioning.Add(new Questioning("Owner's name: ", typeof(string)));
-            m_Questioning.Add(new Questioning("Owner's phone number: ", typeof(int)));
-            m_Questioning.Add(new Questioning("Vehicle's model name: ", typeof(string)));
-            m_Questioning.Add(new Questioning("Vehicle's current energy: ", typeof(float)));
-            m_Questioning.Add(new Questioning("Wheels current air pressure: ", typeof(float)));
-            m_Questioning.Add(new Questioning("Wheels maximum air pressure: ", typeof(string)));
-            m_Questioning.Add(new Questioning("Wheels manufecturer name: ", typeof(string)));
+            m_Questioning.Add(new Questioning("Enter the owner's name: ", typeof(string)));
+            m_Questioning.Add(new Questioning("Enter the owner's phone number: ", typeof(int)));
+            m_Questioning.Add(new Questioning("Enter the vehicle's model name: ", typeof(string)));
+            m_Questioning.Add(new Questioning("Enter the vehicle's current energy: ", typeof(float)));
+            m_Questioning.Add(new Questioning("Enter the wheels current air pressure: ", typeof(float)));
+            m_Questioning.Add(new Questioning("Enter the wheels maximum air pressure: ", typeof(string)));
+            m_Questioning.Add(new Questioning("Enter the wheels manufecturer name: ", typeof(string)));
         }
 
         public Vehicle()
         {
             m_TreatmentCondition = eCondition.InTreatment;
+            m_Questioning = new List<Questioning>();
         }
 
         public eCondition TreatmentCondition

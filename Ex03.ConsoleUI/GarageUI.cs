@@ -57,10 +57,10 @@ namespace Ex03.ConsoleUI
             {
                 string[] mainMenu = ConsoleUI.MainMenu();
                 ConsoleUI.MenuForUser(mainMenu);
-
+                Console.Write("\nChoose an option: ");
                 int userChoice = handleChoice(mainMenu.Length);
                 userSelection = (eMainMunu) Enum.Parse(typeof(eMainMunu), userChoice.ToString());
-
+                Console.Clear();
                 switch (userSelection)
                 {
                     case eMainMunu.VehicleList:
@@ -165,6 +165,7 @@ namespace Ex03.ConsoleUI
             string[] vehiclesMenu = Enum.GetNames(typeof(eVehicleType));
 
             ConsoleUI.MenuForUser(vehiclesMenu);
+            Console.WriteLine("\nChoose a vehicle: ");
             int userChoice = handleChoice(vehiclesMenu.Length);
             eVehicleType vehicleType = (eVehicleType) Enum.Parse(typeof(eVehicleType), userChoice.ToString());
 
@@ -344,6 +345,8 @@ namespace Ex03.ConsoleUI
 
         private void FillQuestioningFromUser(List<Questioning> i_questioningToFill)
         {
+            Console.Clear();
+
             foreach (Questioning currentQuestioning in i_questioningToFill)
             {
                 ConsoleUI.MessegeForUser(currentQuestioning.Question);

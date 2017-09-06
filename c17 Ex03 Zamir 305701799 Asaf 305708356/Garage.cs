@@ -17,20 +17,20 @@ namespace Ex03.GarageLogic
         public List<Questioning> GetInfoToFill(eVehicleType i_VehicleType, string i_licence)
         {
             List<Questioning> questionings = new List<Questioning>();
-
-            if (!m_TreatedVehicles.ContainsKey(i_licence))
-            {
-                Vehicle newVehicle = VehicleFactory.CreateVehicle(i_VehicleType, i_licence);
-                m_TreatedVehicles.Add(i_licence, newVehicle);
-                questionings = newVehicle.Questionings;
-            }
-            else
-            {
-                throw new Exception("Vehicle with licence plate " + i_licence +
-                                    " already exists.\n" +
-                                    "Vehicle status will change to 'in treatment'.");
-            }
-
+            
+                if (!m_TreatedVehicles.ContainsKey(i_licence))
+                {
+                    Vehicle newVehicle = VehicleFactory.CreateVehicle(i_VehicleType, i_licence);
+                    m_TreatedVehicles.Add(i_licence, newVehicle);
+                    questionings = newVehicle.Questionings;
+                }
+                else
+                {
+                    throw new Exception("Vehicle with licence plate " + i_licence +
+                                        " already exists.\n" +
+                                        "Vehicle status will change to 'in treatment'.");
+                }
+            
             return questionings;
         }
 
