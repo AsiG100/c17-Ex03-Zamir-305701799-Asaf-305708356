@@ -4,17 +4,27 @@ namespace Ex03.GarageLogic
 {
     public class Questioning
     {
+        private string m_Question;
+        private string m_Answer;
         private Type m_AnswerType;
 
         public Questioning(string i_Question, Type i_AnswerType)
         {
-            Question = i_Question;
+            m_Question = i_Question;
             m_AnswerType = i_AnswerType;
         }
 
-        public string Question { get; set; }
+        public string Question
+        {
+            get { return m_Question; }
+            set { m_Question = value; }
+        }
 
-        public string Answer { get; set; }
+        public string Answer
+        {
+            get { return m_Answer; }
+            set { m_Answer = value; }
+        }
 
         public Type AnswerType
         {
@@ -23,7 +33,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return Question;
+            return m_Question;
         }
 
         public bool ValidateAnswer()
@@ -32,7 +42,7 @@ namespace Ex03.GarageLogic
 
             try
             {
-                var dummy = Convert.ChangeType(Answer, m_AnswerType);
+                var dummy = Convert.ChangeType(m_Answer, m_AnswerType);
                 validator = true;
             }
             catch (ArgumentNullException)
