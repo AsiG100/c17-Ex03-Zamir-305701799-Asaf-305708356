@@ -9,8 +9,8 @@ namespace Ex03.GarageLogic
 
         public ValueOutOfRangeException( float i_min, float i_max)
         {
-            this.m_MaxValue = i_max;
-            this.m_MinValue = i_min;
+            m_MaxValue = i_max;
+            m_MinValue = i_min;
         }
 
         public float MaxValue
@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
 
         public override string Message
         {
-            get { return "(try " + m_MinValue + " - " + m_MaxValue + ")."; }
+            get { return "(try between " + m_MinValue + " - " + m_MaxValue + ")."; }
         }
     }
 }

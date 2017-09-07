@@ -14,31 +14,29 @@ namespace Ex03.GarageLogic
 
         private eColor m_Color;
         private eDoors m_numOfDoors;
-        private int k_NumberOfWheels = 4;
-        private int k_MaximumAirPressure;
-        private float k_MaximumEnergyCapacity;
+        private const int k_NumberOfWheels = 4;
+        private const int k_MaximumAirPressure = 32;
+        private float m_MaximumEnergyCapacity;
 
         public Car(Energy i_energy, string i_licenceNumber)
         {
-            m_Energy = i_energy;
+            Energy = i_energy;
             m_LicenceNumber = i_licenceNumber;
-            m_Wheels = new List<Wheel>(k_NumberOfWheels);
+            Wheels = new List<Wheel>(k_NumberOfWheels);
 
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel();
+                Wheels.Add(new Wheel());
             }
 
-            if (m_Energy is Fuel)
+            if (Energy is Fuel)
             {
-                k_MaximumAirPressure = 32;
-                k_MaximumEnergyCapacity = 50;
-                (m_Energy as Fuel).FuelType = eFuelType.Octan98;
+                m_MaximumEnergyCapacity = 50;
+                (Energy as Fuel).FuelType = eFuelType.Octan98;
             }
-            else if (m_Energy is Electricity)
+            else if (Energy is Electricity)
             {
-                k_MaximumAirPressure = 32;
-                k_MaximumEnergyCapacity = 2.8f;
+                m_MaximumEnergyCapacity = 2.8f;
             }
         }
 
@@ -52,25 +50,23 @@ namespace Ex03.GarageLogic
         public override void InitializeArguments()
         {
             base.InitializeArguments();
-            m_Energy.MaxCapacity = k_MaximumEnergyCapacity;
+            Energy.MaxCapacity = m_MaximumEnergyCapacity;
             m_numOfDoors = (eDoors) Enum.Parse(typeof(eDoors),
                 m_Questioning[(int) eIndexListQuestioningExtras.NumOfDoors].Answer);
             m_Color = (eColor) Enum.Parse(typeof(eColor),
                 m_Questioning[(int) eIndexListQuestioningExtras.Color].Answer);
 
-            foreach (Wheel currentWheel in m_Wheels)
+            foreach (Wheel currentWheel in Wheels)
             {
                 if (float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelMaxAirPressure].Answer) >
                     k_MaximumAirPressure)
                 {
                     throw new ArgumentException("Wheel maximum pressure is bigger than the motorcycle support");
                 }
-                else
-                {
-                    currentWheel.Initialize(m_Questioning[(int) eIndexListQuestioning.WheelsManufecturer].Answer,
-                        float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelMaxAirPressure].Answer),
-                        float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelCurrentAirPressure].Answer));
-                }
+
+                currentWheel.Initialize(m_Questioning[(int) eIndexListQuestioning.WheelsManufecturer].Answer,
+                    float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelMaxAirPressure].Answer),
+                    float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelCurrentAirPressure].Answer));
             }
         }
 
@@ -78,7 +74,7 @@ namespace Ex03.GarageLogic
         {
             string carInfo = "";
 
-            if (m_Energy is Fuel)
+            if (Energy is Fuel)
             {
                 carInfo = string.Format(
 @"Owner name: {0}
@@ -92,11 +88,11 @@ Fuel Type: {7}
 Current energy: {8} litter
 Number of doors: {9}
 Color: {10}",
-                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, m_TreatmentCondition, m_Wheels[0].Manufacturer,
-                    m_Wheels[0].CurrentAirPressure, ((Fuel) m_Energy).FuelType, m_Energy.CurrentCapacity,
+                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, TreatmentCondition, Wheels[0].Manufacturer,
+                    Wheels[0].CurrentAirPressure, (Energy as Fuel).FuelType, Energy.CurrentCapacity,
                     m_numOfDoors, m_Color);
             }
-            else if (m_Energy is Electricity)
+            else if (Energy is Electricity)
             {
                 carInfo = string.Format(
 @"Owner name: {0}
@@ -106,12 +102,11 @@ Licence number: {3}
 Status: {4}
 Wheels - Manufecturer: {5}, Air pressure: {6}
 Engine type: Electricity
-Fuel Type: {7}
-Current energy: {8} litter
-Number of doors: {9}
-Color: {10}",
-                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, m_TreatmentCondition, m_Wheels[0].Manufacturer,
-                    m_Wheels[0].CurrentAirPressure, ((Electricity) m_Energy).FuelType, m_Energy.CurrentCapacity,
+Current energy: {7} litter
+Number of doors: {8}
+Color: {9}",
+                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, TreatmentCondition, Wheels[0].Manufacturer,
+                    Wheels[0].CurrentAirPressure, Energy.CurrentCapacity,
                     m_numOfDoors, m_Color);
             }
 

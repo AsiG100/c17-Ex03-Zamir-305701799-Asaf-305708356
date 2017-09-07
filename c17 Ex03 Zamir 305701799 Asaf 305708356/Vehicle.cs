@@ -8,11 +8,8 @@ namespace Ex03.GarageLogic
         protected string m_ModelName;
         protected string m_LicenceNumber;
         protected List<Questioning> m_Questioning;
-        protected List<Wheel> m_Wheels;
-        protected Energy m_Energy;
         protected string m_OwnerName;
         protected string m_OwnerPhone;
-        protected eCondition m_TreatmentCondition;
 
         public virtual void CreateQuestionings()
         {
@@ -27,31 +24,19 @@ namespace Ex03.GarageLogic
 
         public Vehicle()
         {
-            m_TreatmentCondition = eCondition.InTreatment;
+            TreatmentCondition = eCondition.InTreatment;
             m_Questioning = new List<Questioning>();
         }
 
-        public eCondition TreatmentCondition
-        {
-            get { return m_TreatmentCondition; }
-            set { m_TreatmentCondition = value; }
-        }
+        public eCondition TreatmentCondition { get; set; }
 
-        public List<Wheel> Wheels
-        {
-            get { return m_Wheels; }
-            set { m_Wheels = value; }
-        }
+        public List<Wheel> Wheels { get; set; }
 
-        public Energy Energy
-        {
-            get { return m_Energy; }
-            set { m_Energy = value; }
-        }
+        public Energy Energy { get; set; }
 
         public virtual void InflateWheels(float i_airToAdd)
         {
-            foreach (Wheel currentWheel in m_Wheels)
+            foreach (Wheel currentWheel in Wheels)
             {
                 currentWheel.InflateWheel(i_airToAdd);
             }
@@ -59,13 +44,13 @@ namespace Ex03.GarageLogic
 
         public virtual void FillWithEnergy(float i_energyToFill)
         {
-            if (i_energyToFill + m_Energy.CurrentCapacity > m_Energy.MaxCapacity)
+            if (i_energyToFill + Energy.CurrentCapacity > Energy.MaxCapacity)
             {
-                throw new ValueOutOfRangeException(0, m_Energy.MaxCapacity - m_Energy.CurrentCapacity);
+                throw new ValueOutOfRangeException(0, Energy.MaxCapacity - Energy.CurrentCapacity);
             }
             else
             {
-                m_Energy.CurrentCapacity += i_energyToFill;
+                Energy.CurrentCapacity += i_energyToFill;
             }
         }
 
@@ -84,7 +69,7 @@ namespace Ex03.GarageLogic
             m_OwnerName = m_Questioning[(int) eIndexListQuestioning.OwnerName].Answer;
             m_OwnerPhone = m_Questioning[(int) eIndexListQuestioning.OwnerPhone].Answer;
             m_ModelName = m_Questioning[(int) eIndexListQuestioning.VehicleModelName].Answer;
-            m_Energy.CurrentCapacity = float.Parse(m_Questioning[(int) eIndexListQuestioning.CurrentEnergyCapacity].Answer);
+            Energy.CurrentCapacity = float.Parse(m_Questioning[(int) eIndexListQuestioning.CurrentEnergyCapacity].Answer);
         }
 
         public abstract string GetInfo();

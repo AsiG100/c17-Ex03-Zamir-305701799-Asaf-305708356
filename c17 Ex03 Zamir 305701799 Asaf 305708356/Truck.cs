@@ -20,13 +20,13 @@ namespace Ex03.GarageLogic
 
         public Truck(Energy i_energy, string i_licenceNumber)
         {
-            m_Energy = i_energy;
-            ((Fuel) m_Energy).FuelType = eFuelType.Soler;
-            m_Wheels = new List<Wheel>(k_NumberOfWheels);
+            Energy = i_energy;
+            ((Fuel) Energy).FuelType = eFuelType.Soler;
+            Wheels = new List<Wheel>(k_NumberOfWheels);
 
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel();
+                Wheels.Add(new Wheel());
             }
 
             m_LicenceNumber = i_licenceNumber;
@@ -44,13 +44,13 @@ namespace Ex03.GarageLogic
         public override void InitializeArguments()
         {
             base.InitializeArguments();
-            m_Energy.MaxCapacity = k_MaximumEnergyCapacity;
+            Energy.MaxCapacity = k_MaximumEnergyCapacity;
             m_IsCarryingDangerousSubstances =
                 bool.Parse(m_Questioning[(int) eIndexListQuestioningExtras.DoesCarryDengerousMaterials].Answer);
             m_CurrentCarryingWeight =
                 float.Parse(m_Questioning[(int) eIndexListQuestioningExtras.MaximumAllowedCarryingWeight].Answer);
 
-            foreach (Wheel currentWheel in m_Wheels)
+            foreach (Wheel currentWheel in Wheels)
             {
                 if (float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelMaxAirPressure].Answer)> k_AirPressureMaxSupport)
                 {
@@ -80,8 +80,8 @@ Fuel Type: {7}
 Current energy: {8} litter
 Does carry dengerous cargo: {9}
 Cargo weight: {10}",
-                m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, m_TreatmentCondition, m_Wheels[0].Manufacturer,
-                m_Wheels[0].CurrentAirPressure, ((Fuel) m_Energy).FuelType, m_Energy.CurrentCapacity,
+                m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, TreatmentCondition, Wheels[0].Manufacturer,
+                Wheels[0].CurrentAirPressure, (Energy as Fuel).FuelType, Energy.CurrentCapacity,
                 m_IsCarryingDangerousSubstances, m_CurrentCarryingWeight);
 
             return truckInfo;

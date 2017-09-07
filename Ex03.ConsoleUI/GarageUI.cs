@@ -56,6 +56,9 @@ namespace Ex03.ConsoleUI
             do
             {
                 Console.Clear();
+                Console.WriteLine("Zamir and Asaf Garage!");
+                Console.WriteLine("======================\n");
+
                 string[] mainMenu = ConsoleUI.MainMenu();
                 ConsoleUI.MenuForUser(mainMenu);
                 Console.Write("\nChoose an option: ");
@@ -165,34 +168,41 @@ namespace Ex03.ConsoleUI
             string licence = Console.ReadLine();
             string[] vehiclesMenu = Enum.GetNames(typeof(eVehicleType));
 
-            ConsoleUI.MenuForUser(vehiclesMenu);
-            Console.WriteLine("\nChoose a vehicle: ");
-            int userChoice = handleChoice(vehiclesMenu.Length);
-            eVehicleType vehicleType = (eVehicleType) Enum.Parse(typeof(eVehicleType), userChoice.ToString());
-
-            try
+            do
             {
-                List<Questioning> vehicleQuestioningsToFill = m_garage.GetInfoToFill(vehicleType, licence);
+                Console.Clear();
+                Console.WriteLine("Vehicles type selection");
+                Console.WriteLine("=======================\n");
 
-                FillQuestioningFromUser(vehicleQuestioningsToFill);
-                m_garage.InitialNewVehicleInfo(licence);
-            }
-            catch (ArgumentException ex)
-            {
-                ConsoleUI.MessegeForUser(ex.Message);
-                if (ex.InnerException != null)
+                ConsoleUI.MenuForUser(vehiclesMenu);
+                Console.WriteLine("\nChoose a vehicle: ");
+                int userChoice = handleChoice(vehiclesMenu.Length);
+                eVehicleType vehicleType = (eVehicleType) Enum.Parse(typeof(eVehicleType), userChoice.ToString());
+
+                try
                 {
-                    ConsoleUI.MessegeForUser(ex.InnerException.Message);
-                }
+                    List<Questioning> vehicleQuestioningsToFill = m_garage.GetInfoToFill(vehicleType, licence);
 
-                ConsoleUI.MessegeForUser("Information of vehicle with " + licence + "isn't correct. try again.");
-                m_garage.RemoveVehicle(licence);
-            }
-            catch (Exception ex)
-            {
-                ConsoleUI.MessegeForUser(ex.Message);
-                m_garage.ChangeVehicleCondition(licence, eCondition.InTreatment);
-            }
+                    FillQuestioningFromUser(vehicleQuestioningsToFill);
+                    m_garage.InitialNewVehicleInfo(licence);
+                }
+                catch (ArgumentException ex)
+                {
+                    ConsoleUI.MessegeForUser(ex.Message);
+                    if (ex.InnerException != null)
+                    {
+                        ConsoleUI.MessegeForUser(ex.InnerException.Message);
+                    }
+
+                    ConsoleUI.MessegeForUser("Information of vehicle with " + licence + "isn't correct. try again.");
+                    m_garage.RemoveVehicle(licence);
+                }
+                catch (Exception ex)
+                {
+                    ConsoleUI.MessegeForUser(ex.Message);
+                    m_garage.ChangeVehicleCondition(licence, eCondition.InTreatment);
+                }
+            } while (true);
 
             Console.WriteLine("Press any key to return to main menu.");
             Console.ReadKey();
@@ -364,15 +374,17 @@ namespace Ex03.ConsoleUI
                 }
                 else
                 {
-                    currentQuestioning.Answer = Console.ReadLine();
-                    while (!currentQuestioning.ValidateAnswer())
+                    do
                     {
-                        string messege = "Wrong input. try again.";
-                        ConsoleUI.MessegeForUser(messege);
-                        ConsoleUI.MessegeForUser(currentQuestioning.Question);
-
                         currentQuestioning.Answer = Console.ReadLine();
-                    }
+
+                        if (!currentQuestioning.ValidateAnswer())
+                        {
+                            string messege = "Wrong input. try again.";
+                            ConsoleUI.MessegeForUser(messege);
+                            ConsoleUI.MessegeForUser(currentQuestioning.Question);
+                        }
+                    } while (!currentQuestioning.ValidateAnswer());
                 }
             }
         }

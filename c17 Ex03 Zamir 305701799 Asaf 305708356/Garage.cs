@@ -112,21 +112,18 @@ namespace Ex03.GarageLogic
             {
                 throw new Exception("Vehicle doesn't exists!");
             }
-            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Electricity)
+            if (m_TreatedVehicles ? [i_licence].Energy is Electricity)
             {
                 throw new ArgumentException("Vehicle works on electricity and not on fuel!");
             }
-            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Fuel)
+            if (m_TreatedVehicles ? [i_licence].Energy is Fuel)
             {
-                throw new ArgumentException("Fuel type doesn't matchQ");
+                throw new ArgumentException("Fuel type doesn't match");
             }
 
             try
             {
-                if (m_TreatedVehicles != null)
-                {
-                    m_TreatedVehicles[i_licence].FillWithEnergy(i_quantityToAdd);
-                }
+                m_TreatedVehicles?[i_licence].FillWithEnergy(i_quantityToAdd);
             }
             catch (Exception ex)
             {
@@ -140,17 +137,14 @@ namespace Ex03.GarageLogic
             {
                 throw new Exception("Vehicle doesn't exists!");
             }
-            if (m_TreatedVehicles != null && m_TreatedVehicles[i_licence].Energy is Fuel)
+            if (m_TreatedVehicles ? [i_licence].Energy is Fuel)
             {
                 throw new ArgumentException("Vehicle works on fuel and not on electricity!");
             }
 
             try
             {
-                if (m_TreatedVehicles != null)
-                {
-                    m_TreatedVehicles[i_licence].FillWithEnergy(i_quantityToAdd);
-                }
+                m_TreatedVehicles?[i_licence].FillWithEnergy(i_quantityToAdd);
             }
             catch (Exception ex)
             {

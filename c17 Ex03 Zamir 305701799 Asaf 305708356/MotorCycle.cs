@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
@@ -16,30 +15,28 @@ namespace Ex03.GarageLogic
         private eLicenceType m_LicenceType;
         private int m_EnergyCapacity;
         private const int k_NumberOfWheels = 2;
-        private int k_MaximumAirPressure;
-        private float k_MaximumEnergyCapacity;
+        private const int k_MaximumAirPressure = 28;
+        private float m_MaximumEnergyCapacity;
 
         public MotorCycle(Energy i_energy, string i_licencePlate)
         {
-            m_Energy = i_energy;
+            Energy = i_energy;
             m_LicenceNumber = i_licencePlate;
-            m_Wheels = new List<Wheel>(k_NumberOfWheels);
+            Wheels = new List<Wheel>(k_NumberOfWheels);
 
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                m_Wheels.Add(new Wheel());
+                Wheels.Add(new Wheel());
             }
 
-            if (m_Energy is Fuel)
+            if (Energy is Fuel)
             {
-                k_MaximumAirPressure = 28;
-                k_MaximumEnergyCapacity = 5.5f;
-                (m_Energy as Fuel).FuelType = eFuelType.Octan95;
+                m_MaximumEnergyCapacity = 5.5f;
+                (Energy as Fuel).FuelType = eFuelType.Octan95;
             }
             else
             {
-                k_MaximumAirPressure = 28;
-                k_MaximumEnergyCapacity = 1.6f;
+                m_MaximumEnergyCapacity = 1.6f;
             }
 
             CreateQuestionings();
@@ -55,12 +52,12 @@ namespace Ex03.GarageLogic
         public override void InitializeArguments()
         {
             base.InitializeArguments();
-            m_Energy.MaxCapacity = k_MaximumEnergyCapacity;
+            Energy.MaxCapacity = m_MaximumEnergyCapacity;
             m_LicenceType = (eLicenceType) Enum.Parse(typeof(eLicenceType),
                 m_Questioning[(int) eIndexListQuestioningExtras.LicenceType].Answer);
             m_EnergyCapacity = int.Parse(m_Questioning[(int) eIndexListQuestioningExtras.EnergyCapacity].Answer);
 
-            foreach (Wheel currentWheel in m_Wheels)
+            foreach (Wheel currentWheel in Wheels)
             {
                 if (float.Parse(m_Questioning[(int) eIndexListQuestioning.WheelMaxAirPressure].Answer) >
                     k_MaximumAirPressure)
@@ -76,12 +73,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        [SuppressMessage("ReSharper", "PossibleInvalidCastException")]
         public override string GetInfo()
         {
             string motorcycleInfo = "";
 
-            if (m_Energy is Fuel)
+            if (Energy is Fuel)
             {
                 motorcycleInfo = string.Format(
 @"Owner name: {0}
@@ -93,13 +89,13 @@ Wheels - Manufecturer: {5}, Air pressure: {6}
 Engine type: Fuel
 Fuel Type: {7}
 Current energy: {8} litter
-Engine cc: {9}
+Maximum Engine cc: {9}
 Licence type: {10}",
-                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, m_TreatmentCondition, m_Wheels[0].Manufacturer,
-                    m_Wheels[0].CurrentAirPressure, (m_Energy as Fuel).FuelType, m_Energy.CurrentCapacity,
+                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, TreatmentCondition, Wheels[0].Manufacturer,
+                    Wheels[0].CurrentAirPressure, (Energy as Fuel).FuelType, Energy.CurrentCapacity,
                     m_EnergyCapacity, m_LicenceType);
             }
-            else if (m_Energy is Electricity)
+            else if (Energy is Electricity)
             {
                 motorcycleInfo = string.Format(
 @"Owner name: {0}
@@ -109,12 +105,11 @@ Licence number: {3}
 Status: {4}
 Wheels - Manufecturer: {5}, Air pressure: {6}
 Engine type: Electricity
-Fuel Type: {7}
-Current energy: {8} litter
-Engine cc: {9}
-Licence type: {10}",
-                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, m_TreatmentCondition, m_Wheels[0].Manufacturer,
-                    m_Wheels[0].CurrentAirPressure, ((Fuel) m_Energy).FuelType, m_Energy.CurrentCapacity,
+Current energy: {7} litter
+Maximum Engine cc: {8}
+Licence type: {9}",
+                    m_OwnerName, m_OwnerPhone, m_ModelName, m_LicenceNumber, TreatmentCondition, Wheels[0].Manufacturer,
+                    Wheels[0].CurrentAirPressure, Energy.CurrentCapacity,
                     m_EnergyCapacity, m_LicenceType);
             }
 
